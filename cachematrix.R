@@ -2,14 +2,14 @@
 ## variable and functions that operate on it to get, set, and calculate its inverse
 
 makeCacheMatrix <- function(x = matrix()) {
-xinv <- NULL
+inv <- NULL
         set <- function(y) {
                 x <<- y
-                xinv <<- NULL
+                inv <<- NULL
         }
-        get <- function() xinv
-        setinv <- function(inv) xinv <<- inv
-        getinv <- function() xinv
+        get <- function() x
+        setinv <- function(inverse) inv <<- inverse
+        getinv <- function() inv
         list(set = set, get = get,
              setinv = setinv,
              getinv = getinv)
@@ -22,13 +22,15 @@ xinv <- NULL
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-		xinv <- x$getinv()
-        if(!is.null(xinv)) {
+		inv <- x$getinv()
+        if(!is.null(inv)) {
                 message("getting cached data")
-                return(xinv)
+                return(inv)
         }
         data <- x$get()
-        xinv <- solve(data, ...)
-        x$setinv(xinv)
-        xinv
+        inv <- solve(data, ...)
+        x$setinv(inv)
+        inv
 }
+
+## d9c1a3523c60b59df9979f331366a1059d4d2f9b
